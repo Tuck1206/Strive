@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.TextField(max_length=20)
     xp = models.IntegerField(default=0)
     level = models.IntegerField(default=1)
 

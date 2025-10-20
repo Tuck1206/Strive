@@ -1,23 +1,17 @@
 from django import forms
-from .models import Workout, UserProfile
-
-class WorkoutForm(forms.ModelForm):
-    class meta:
-        model = Workout
-        fields = ["title", "difficulty", "category"]
-        widgets = {
-            "title": forms.TextInput(attrs={"class": "form-control"}),
-            "difficulty": forms.Select(attrs={"class": "form-control"}),
-            "category": forms.Select(attrs={"class": "form-control"})
-        }
-
+from .models import UserProfile, Workout
 
 class UserProfileForm(forms.ModelForm):
-    class meta:
+    class Meta:
         model = UserProfile
-        fields = ["user", "level", "xp"]
+        fields = ['name', 'xp', 'level']
         widgets = {
-            "user": forms.HiddenInput(),
-            "level": forms.NumberInput(attrs={"class": "form-control"}),
-            "xp": forms.NumberInput(attrs={"class": "form-control"})
+            'xp': forms.NumberInput(attrs={'readonly': True}),
+            'level': forms.NumberInput(attrs={'readonly': True}),
         }
+
+
+class WorkoutForm(forms.ModelForm):
+    class Meta:
+        model = Workout
+        fields = ['title', 'description', 'difficulty', 'category']
