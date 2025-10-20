@@ -4,7 +4,7 @@ from .models import UserProfile, Workout
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['name', 'xp', 'level']
+        fields = ['bio', 'xp', 'level']
         widgets = {
             'xp': forms.NumberInput(attrs={'readonly': True}),
             'level': forms.NumberInput(attrs={'readonly': True}),

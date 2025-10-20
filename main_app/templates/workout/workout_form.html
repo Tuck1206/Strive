@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Workout Form{% endblock %}
+{% block content %}
+<section class="form-section">
+  <h1>{% if form.instance.pk %}Edit Workout{% else %}Add Workout{% endif %}</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-primary">Save Workout</button>
+  </form>
+</section>
+{% endblock %}

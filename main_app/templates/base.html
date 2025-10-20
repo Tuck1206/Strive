@@ -1,32 +1,33 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" type="" href="" />
-    <title>Strive</title>
-    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
-    {% block head %} 
-    {% endblock %}
-  </head>
-  <body>
-    <header>
-      <div class="header-logo-container">
-        <a href="/">
-          <img src="" alt="" />
-        </a>
-      </div>
-      <nav>
-        <ul>
-        <li><a href="/myworkouts">My Workouts</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-     {% block content %} 
-     {% endblock %}
-     </main>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Strive{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <a href="{% url 'dashboard' %}">Strive</a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'workout_index' %}">Workouts</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 Strive — Built for Performance & Progress</p>
+  </footer>
+</body>
 </html>

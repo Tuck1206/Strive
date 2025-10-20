@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}My Workouts{% endblock %}
+{% block content %}
+<section class="workouts">
+  <h1>My Workouts</h1>
+  <a href="{% url 'workout_create' %}" class="btn-primary">Add Workout</a>
+
+  <div class="workout-grid">
+    {% for workout in workouts %}
+      <div class="workout-card {% if workout.completed %}completed{% endif %}">
+        <h3>{{ workout.title }}</h3>
+        <p><strong>Difficulty:</strong> {{ workout.difficulty|title }}</p>
+        <p><strong>Category:</strong> {{ workout.category|title }}</p>
+        <p><strong>XP:</strong> {{ workout.xp_value }}</p>
+
+        <div class="actions">
+          <a href="{% url 'workout_detail' workout.id %}" class="btn-secondary">View</a>
+          {% if not workout.completed %}
+          <a href="{% url 'complete-workout' workout.id %}" class="btn-success">Mark Complete</a>
+          {% endif %}
+        </div>
+      </div>
+    {% empty %}
+      <p>No workouts yet — add one to get started!</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
