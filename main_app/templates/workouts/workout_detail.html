@@ -2,6 +2,7 @@
 {% block title %}{{ workout.title }}{% endblock %}
 {% block content %}
 <section class="detail">
+   {% for workout in Workouts %}
   <h1>{{ workout.title }}</h1>
   <p><strong>Difficulty:</strong> {{ workout.difficulty|title }}</p>
   <p><strong>Category:</strong> {{ workout.category|title }}</p>

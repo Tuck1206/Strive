@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='achievement',
-            name='users',
+            name='user',
             field=models.ManyToManyField(blank=True, related_name='achievements', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(

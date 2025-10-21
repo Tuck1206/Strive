@@ -2,8 +2,18 @@
 {% block title %}Workout Form{% endblock %}
 {% block content %}
 <section class="form-section">
-  <h1>{% if form.instance.pk %}Edit Workout{% else %}Add Workout{% endif %}</h1>
 
+<div class="page-header">
+  {% if workout %}
+    <h1>Edit 
+      {{ workout.title }} 
+      {{ workout.description }} 
+      {{ workout.difficulty}}
+      {{ workout.category}}</h1>
+  {% else %}
+    <h1>Add a Workout</h1>
+  {% endif %}
+</div>
   <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}

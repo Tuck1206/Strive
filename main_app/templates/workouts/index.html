@@ -1,18 +1,13 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/workouts/workout_index.css' %}"
+/>
+{% endblock %} {% block content %}
 
-<div class="dashboard-container">
-  <h1>Welcome, {{ profile.user.username }}!</h1>
-  <h3>Level: {{ profile.level }}</h3>
-
-  <div class="progress-container">
-    <div class="progress-bar" style="width: {{ progress }}%;"></div>
-  </div>
-  <p>{{ profile.bio }}</p>
-  <p>Current XP To Next Level:{{ total_xp }}</p>
-
-
-  <!-- <h2> My Workouts</h2>
+<section class="page-header">
+ 
+  <h2> My Workouts</h2>
   <div class="workout-grid">
       {% for workout in workouts %}
       <h3>Title:{{ workout.title }}</h3>
@@ -34,15 +29,4 @@
       {% endfor %}
     </div>
     <a href="{% url 'workout_create' %}" class="btn-primary"> Add Workout</a>
-     -->
-  <h2>Achievements</h2>
-  <ul class="achievements-list">
-    {% for a in achievements %}
-      <li>{{ a.title }} {{ a.description }}</li>
-    {% empty %}
-      <li>No achievements yet. Keep working out!</li>
-    {% endfor %}
-  </ul>
-</div>
-
-{% endblock %}
+    

@@ -11,12 +11,15 @@
 <body>
   <header class="navbar">
     <div class="logo">
-      <a href="{% url 'dashboard' %}">Strive</a>
+      <a href="{% url 'home' %}">Strive</a>
     </div>
     <nav>
       <ul>
           {% if user.is_authenticated %}
             <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="/workouts">My Workouts</a></li>
+             <li><a href="{% url 'workout_create' %}">Add a Workout</a></li>
+
             <li>
                 <form id="logout-form" method="post" action="{% url 'logout' %}">
                     {% csrf_token %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href=""
+/>
+{% endblock %} {% block content %}
+
+<section class="page-header">
+  <h1>My Workouts</h1>
+</section>
+
+<section class="card-container">
+  {% for workout in workouts %}
+  <div class="card">
+    <a href="{% url 'workout_detail' workout.id %}">
+    <div class="card-content">
+      <div class="card-img-container">
+      </div>
+      <h2 class="card-title">{{ workout.title }}</h2>
+      <p>Difficulty: {{ workout.difficulty }}
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
