@@ -37,14 +37,13 @@ class UserProfile(models.Model):
 
 
 class Workout(models.Model):
-
     title = models.CharField(max_length=150)
-    description = models.TextField(max_length=300, blank=True)
+    description = models.TextField(max_length=300)
     difficulty = models.CharField(max_length=10, choices=DIFFICULTIES)
     category = models.CharField(max_length=20, choices=CATEGORIES)
     xp_value = models.IntegerField(default=0)
     completed = models.BooleanField(default=False)
-
+    userprofile= models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.title} ({self.difficulty}, {self.category})"
 
@@ -72,4 +71,3 @@ def create_profile(sender, instance, created, **kwargs):
             title="Welcome!",
             description="You joined the fitness app and created your profile!"
         )
-        

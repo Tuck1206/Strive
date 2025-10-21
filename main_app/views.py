@@ -12,8 +12,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
-def home(request):
-    return HttpResponse('<h1>Welcome to Strive!</h1>')
+class Home(LoginView):
+    template_name = 'home.html'
 
 def signup(request):
     error_message = ''
@@ -31,22 +31,22 @@ def signup(request):
 
 
 def dashboard(request):
-    profile = UserProfile.objects.get(id=request.user.id)
-    workouts = Workout.objects.filter(user=request.user).order_by('difficulty')
-    achievements = Achievement.objects.filter(user=request.user).order_by('difficulty')
-    xp_needed = profile.level * 200
-    progress = round((profile.xp / xp_needed) * 200, 1) if xp_needed else 0
+    profile = UserProfile.objects.get(user=request.user)
+    workouts = Workout.objects.filter(userprofile = profile).order_by('difficulty')
+    # achievements = Achievement.objects.filter(userprofile=request.user).order_by('difficulty')
+    # xp_needed = profile.level * 200
+    # progress = round((profile.xp / xp_needed) * 200, 1) if xp_needed else 0
 
     return render(request, 'dashboard.html', {
         'profile': profile,
         'workouts': workouts,
-        'achievements': achievements,
-        'progress': progress,
+        # 'achievements': achievements,
+        # 'progress': progress,
     })
 
-def workout_index(request):
-    workouts= Workout.objects.filter(user=request.user)
-    return render(request, 'workouts_index.html', {'workouts': workouts})
+# def workout_index(request):
+#     workouts= Workout.objects.filter(user_id = UserProfile)
+#     return render(request, 'workout_index.html', {'workouts': workouts})
 
 def workout_detail(request, workout_id):
     workout = Workout.objects.get(id=workout_id)
@@ -60,22 +60,23 @@ def complete_workout(request, workout_id):
 class WorkoutCreate(CreateView):
     model = Workout
     fields = ['title', 'description', 'difficulty', 'category']
-    template_name = 'workout_form.html'
-    success_url ='workouts/'
+    template_name = 'workout/workout_form.html'
+    success_url ='dashboard/'
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        profile = UserProfile.objects.get(user=self.request.user)
+        form.instance.userprofile = profile
         return super().form_valid(form)
 
 
 class WorkoutUpdate(UpdateView):
     model = Workout
     fields = ['title', 'description', 'difficulty', 'category', 'completed']
-    template_name = 'workout_form.html'
-    success_url ='workouts/'
+    template_name = 'workout/workout_form.html'
+    success_url ='dashboard/'
 
 
 class WorkoutDelete(DeleteView):
     model = Workout
-    template_name = 'workout_confirm_delete.html'
-    success_url ='workouts/'
+    template_name = 'workout/workout_confirm_delete.html'
+    success_url ='dashboard/'

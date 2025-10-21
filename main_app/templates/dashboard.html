@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<section class="dashboard">
+  <h1>Welcome, {{ user.username }} 👋</h1>
+
+  <div class="stats">
+    <div class="card">
+      <h3>Level</h3>
+      <p>{{ profile.level }}</p>
+    </div>
+    <div class="card">
+      <h3>XP</h3>
+      <p>{{ profile.xp_vaule }} {{ profile.level }}</p>
+    </div>
+    <div class="card">
+      <h3>Progress</h3>
+      <div class="progress-bar">
+        <div class="progress" style="width: {{ progress }}%;"></div>
+      </div>
+      <small>{{ progress }}% to next level</small>
+    </div>
+  </div>
+
+  <div class="actions">
+    <a href="{% url 'workout_create' %}" class="btn-secondary">Add Workout</a>
+  </div>
+
+  <h2>Recent Achievements 🏆</h2>
+  <div class="achievement-list">
+    {% for a in achievements %}
+    <div class="achievement-card">
+      <h4>{{ a.title }}</h4>
+      <p>{{ a.description }}</p>
+    </div>
+    {% empty %}
+    <p>No achievements yet — start completing workouts!</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
