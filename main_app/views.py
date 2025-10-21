@@ -50,8 +50,8 @@ def workout_index(request):
     workouts= Workout.objects.filter(userprofile__user=request.user)
     return render(request, 'workouts_index.html', {'workouts': workouts})
 
-def workout_detail(request, pk):
-    workout = Workout.objects.get(pk=pk)
+def workout_detail(request, workout_id):
+    workout = Workout.objects.get(id=workout_id)
     return render(request, 'workouts/workout_detail.html', {'workout': workout})
 
 def complete_workout(request, workout_id):
