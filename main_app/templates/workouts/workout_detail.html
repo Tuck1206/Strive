@@ -4,7 +4,6 @@
   <h1>{{ workout.title }}</h1>
   <p>Difficulty: {{ workout.difficulty|title }}</p>
   <p>Category: {{ workout.category|title }}</p>
-  <p>XP: {{ workout.xp_value }}</p>
   <p>Description: {{ workout.description }}</p>
 
   <a href="{% url 'workout_update' workout.id %}" class="btn-secondary">Edit</a>

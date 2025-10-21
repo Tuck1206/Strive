@@ -70,14 +70,21 @@ def complete_workout(request, workout_id):
             profile.xp -= xp_needed
             profile.level += 1
 
+            if not Achievement.objects.filter(user=request.user, title="You Did It, You Leveled Up!").exists():
+                Achievement.objects.create(
+                    user=request.user,
+                    title="You Did It, You Leveled Up!",
+                    description=f"Congratulations on reaching level {profile.level}!"
+                )
+
         profile.save()
 
-        if not Achievement.objects.filter(user=request.user, title="First Workout!").exists():
-            Achievement.objects.create(
-                user=request.user,
-                title="First Workout!",
-                description="Completed your first workout!"
-            )
+        # if not Achievement.objects.filter(user=request.user, title="First Workout!").exists():
+        #     Achievement.objects.create(
+        #          user=profile.user,
+        #         title="First Workout!",
+        #         description="Completed your first workout!"
+        #     )
 
     return redirect('/dashboard')  
 
