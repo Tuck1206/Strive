@@ -1,20 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}{{ workout.title }}{% endblock %}
 {% block content %}
-<section class="detail">
-   {% for workout in Workouts %}
   <h1>{{ workout.title }}</h1>
-  <p><strong>Difficulty:</strong> {{ workout.difficulty|title }}</p>
-  <p><strong>Category:</strong> {{ workout.category|title }}</p>
-  <p><strong>XP:</strong> {{ workout.xp_value }}</p>
-  <p><strong>Description:</strong> {{ workout.description }}</p>
+  <p>Difficulty: {{ workout.difficulty|title }}</p>
+  <p>Category: {{ workout.category|title }}</p>
+  <p>XP: {{ workout.xp_value }}</p>
+  <p>Description: {{ workout.description }}</p>
 
-  <div class="actions">
-    <a href="{% url 'workout_update' workout.id %}" class="btn-secondary">Edit</a>
-    <a href="{% url 'workout_delete' workout.id %}" class="btn-danger">Delete</a>
-    {% if not workout.completed %}
+  <a href="{% url 'workout_update' workout.id %}" class="btn-secondary">Edit</a>
+  <a href="{% url 'workout_delete' workout.id %}" class="btn-danger">Delete</a>
+  {% if not workout.completed %}
     <a href="{% url 'complete-workout' workout.id %}" class="btn-success">Mark Complete</a>
-    {% endif %}
-  </div>
-</section>
+  {% endif %}
 {% endblock %}

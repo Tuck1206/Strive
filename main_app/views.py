@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 from .models import Workout, UserProfile, Achievement
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
@@ -30,13 +29,8 @@ def signup(request):
     return render(request, 'signup.html', context)
 
 
-def Workout_index(request):
-    return render(request, 'workouts_index.html', {'workout': Workout})
-
-
 def dashboard(request):
     profile = UserProfile.objects.get(user=request.user)
-    workouts = Workout.objects.filter(userprofile = profile).order_by('difficulty')
     achievements = Achievement.objects.filter(user=request.user).order_by('title')
 
     xp_needed = profile.level * 200
@@ -46,20 +40,19 @@ def dashboard(request):
 
     return render(request, 'dashboard.html', {
         'profile': profile,
-        'workouts': workouts,
         'achievements': achievements,
         'progress': progress,
         'total_xp': total_xp
        
     })
 
-# def workout_index(request):
-#     workouts= Workout.objects.filter(user_id = UserProfile)
-#     return render(request, 'workout_index.html', {'workouts': workouts})
+def workout_index(request):
+    workouts= Workout.objects.filter(userprofile__user=request.user)
+    return render(request, 'workouts_index.html', {'workouts': workouts})
 
-def workout_detail(request, workout_id):
-    workout = Workout.objects.get(id=workout_id)
-    return render(request, 'workout_detail.html', {'workout': workout})
+def workout_detail(request, pk):
+    workout = Workout.objects.get(pk=pk)
+    return render(request, 'workouts/workout_detail.html', {'workout': workout})
 
 def complete_workout(request, workout_id):
     workout = get_object_or_404(Workout, id=workout_id, userprofile__user=request.user)
@@ -68,30 +61,31 @@ def complete_workout(request, workout_id):
     if not workout.completed:
         workout.completed = True
         workout.save()
+
         xp_gain = {'easy': 10, 'medium': 25, 'hard': 40}.get(workout.difficulty, 15)
         profile.xp += xp_gain
 
-        # Level up logic
-        xp_needed = profile.level * 200
-        if profile.xp >= xp_needed:
+        xp_needed = max(profile.level * 200, 1) 
+        while profile.xp >= xp_needed:
             profile.xp -= xp_needed
             profile.level += 1
 
         profile.save()
 
-        # Give achievement for first completed workout
-    if not Achievement.objects.filter(user=request.user, title="First Workout!").exists():
-        Achievement.objects.create(
-        user=request.user,
-        title="First Workout!",
-        description="Completed your first workout!"
-    )
+        if not Achievement.objects.filter(user=request.user, title="First Workout!").exists():
+            Achievement.objects.create(
+                user=request.user,
+                title="First Workout!",
+                description="Completed your first workout!"
+            )
+
+    return redirect('/dashboard')  
 
 class WorkoutCreate(CreateView):
     model = Workout
     fields = ['title', 'description', 'difficulty', 'category']
     template_name = 'workouts/workout_form.html'
-    success_url ='dashboard/'
+    success_url ='/workouts/'
 
     def form_valid(self, form):
         profile = UserProfile.objects.get(user=self.request.user)
@@ -103,10 +97,10 @@ class WorkoutUpdate(UpdateView):
     model = Workout
     fields = ['title', 'description', 'difficulty', 'category', 'completed']
     template_name = 'workouts/workout_form.html'
-    success_url ='dashboard/'
+    success_url ='/workouts/'
 
 
 class WorkoutDelete(DeleteView):
     model = Workout
     template_name = 'workouts/workout_confirm_delete.html'
-    success_url ='dashboard/'
+    success_url ='/workouts/'
