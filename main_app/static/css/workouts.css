@@ -1,0 +1,119 @@
+/* ---------- Page Header ---------- */
+.page-header {
+  text-align: center;
+  margin: 3rem 0 2rem 0;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  animation: fadeUp 0.8s ease;
+}
+
+.page-header h1::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #c70000, #7a0000);
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* ---------- Card Container ---------- */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto 4rem auto;
+  padding: 0 1rem;
+}
+
+/* ---------- Workout Card ---------- */
+.card {
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(199, 0, 0, 0.3);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(199,0,0,0.4);
+}
+
+.card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.card-difficulty {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #bbb;
+}
+
+/* ---------- Empty State ---------- */
+.no-workouts {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #777;
+  margin-top: 3rem;
+}
+
+/* ---------- Background Layer ---------- */
+body {
+  background: #0a0a0a;
+  color: #eee;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+
+.card-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../images/gym-bg.jpg") center/cover no-repeat;
+  opacity: 0.05;
+  z-index: -2;
+}
+
+.card-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(10,10,10,0.85), rgba(0,0,0,0.95));
+  z-index: -1;
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
