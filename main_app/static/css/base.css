@@ -1,4 +1,5 @@
-/* ---------- Base Reset ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700;800&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -12,9 +13,32 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.3px;
+  line-height: 1.6;
 }
 
-/* ---------- Navbar ---------- */
+h1, h2, h3 {
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+p {
+  font-size: 1rem;
+  color: #d4d4d4;
+}
+
+a {
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #c70000;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -67,7 +91,6 @@ body {
   color: #fff;
 }
 
-/* ---------- Hero Section ---------- */
 .container {
   flex: 1;
   display: flex;
@@ -80,7 +103,6 @@ body {
   overflow: hidden;
 }
 
-/* Background layer */
 .container::before {
   content: "";
   position: absolute;
@@ -91,7 +113,6 @@ body {
   z-index: -2;
 }
 
-/* Subtle gradient overlay */
 .container::after {
   content: "";
   position: absolute;
@@ -100,7 +121,6 @@ body {
   z-index: -1;
 }
 
-/* Advanced Heading */
 .hero-title {
   font-size: clamp(2.8rem, 5vw, 4.5rem);
   font-weight: 800;
@@ -116,7 +136,6 @@ body {
   animation: slideIn 1.2s ease forwards;
 }
 
-/* Accent underline */
 .hero-title::after {
   content: "";
   position: absolute;
@@ -130,7 +149,6 @@ body {
   animation: expandBar 1.3s ease forwards;
 }
 
-/* Tagline */
 .hero-sub {
   margin-top: 1.2rem;
   font-size: 1.1rem;
@@ -141,7 +159,6 @@ body {
   animation: fadeIn 1.5s ease forwards;
 }
 
-/* ---------- Animations ---------- */
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -175,7 +192,6 @@ body {
   }
 }
 
-/* ---------- Footer ---------- */
 .footer {
   text-align: center;
   padding: 1.2rem;
@@ -183,4 +199,91 @@ body {
   border-top: 1px solid #c70000;
   font-size: 0.9rem;
   color: #aaa;
+}
+
+section form.login {
+  margin-top: 3rem;
+  background: #151515;
+  padding: 2.5rem 2rem;
+  border-radius: 14px;
+  border: 1px solid #2e2e2e;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  width: 320px;
+}
+
+form.login h1 {
+  text-align: center;
+  font-family: "Bebas Neue", sans-serif;
+  color: #fff;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 1.5rem;
+}
+
+form.login p {
+  margin-bottom: 1rem;
+}
+
+form.login label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #ccc;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+form.login input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+form.login input:focus {
+  border-color: #c70000;
+  outline: none;
+  background: #202020;
+}
+
+form.login .btn.submit {
+  width: 100%;
+  padding: 0.9rem;
+  background: #c70000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
+}
+
+form.login .btn.submit:hover {
+  background: #a30000;
+  transform: translateY(-2px);
+}
+
+form.login input::placeholder {
+  color: #888;
+}
+
+@media (max-width: 600px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  section form.login {
+    width: 90%;
+    padding: 2rem 1.2rem;
+  }
 }

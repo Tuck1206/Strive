@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/workout_form.css' %}">
+{% endblock %}
+
+{% block title %}Edit Bio{% endblock %}
+
+{% block content %}
+<section class="form-section">
+
+  <div class="page-header">
+    <h1 class="form-title">Edit Your Bio</h1>
+    <p class="form-subtext">Tell others a bit about yourself and your fitness journey.</p>
+  </div>
+
+  <form method="POST" class="workout-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn-primary">
+      Save Changes
+    </button>
+  </form>
+
+</section>
+{% endblock %}

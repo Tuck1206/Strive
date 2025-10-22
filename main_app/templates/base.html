@@ -19,7 +19,7 @@
           {% if user.is_authenticated %}
             <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
             <li><a href="/workouts">My Workouts</a></li>
-             <li><a href="{% url 'workout_create' %}">Add a Workout</a></li>
+            <li><a href="{% url 'workout_create' %}">Add a Workout</a></li>
 
             <li>
                 <form id="logout-form" method="post" action="{% url 'logout' %}">

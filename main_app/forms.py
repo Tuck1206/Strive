@@ -7,7 +7,20 @@ class UserProfileForm(forms.ModelForm):
         fields = ['bio', 'xp', 'level']
         widgets = {
             'xp': forms.NumberInput(attrs={'readonly': True}),
-            'level': forms.NumberInput(attrs={'readonly': True}),
+            'level': forms.NumberInput(attrs={'readonly': True})
+        }
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['bio']
+        widgets = {
+            'bio': forms.Textarea(attrs={
+                'class': 'form-control bio-box',
+                'placeholder': 'Write something about yourself...',
+                'rows': 4
+            })
         }
 
 

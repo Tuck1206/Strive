@@ -1,4 +1,3 @@
-/* ---------- Page Header ---------- */
 .page-header {
   text-align: center;
   margin: 3rem 0 2rem 0;
@@ -24,7 +23,6 @@
   border-radius: 2px;
 }
 
-/* ---------- Card Container ---------- */
 .card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -34,7 +32,6 @@
   padding: 0 1rem;
 }
 
-/* ---------- Workout Card ---------- */
 .card {
   background: rgba(20, 20, 20, 0.95);
   border: 1px solid rgba(199, 0, 0, 0.3);
@@ -73,7 +70,6 @@
   color: #bbb;
 }
 
-/* ---------- Empty State ---------- */
 .no-workouts {
   text-align: center;
   font-size: 1.2rem;
@@ -81,7 +77,6 @@
   margin-top: 3rem;
 }
 
-/* ---------- Background Layer ---------- */
 body {
   background: #0a0a0a;
   color: #eee;
@@ -106,7 +101,6 @@ body {
   z-index: -1;
 }
 
-/* ---------- Animations ---------- */
 @keyframes fadeUp {
   from {
     opacity: 0;

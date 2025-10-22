@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Workout, UserProfile, Achievement
+from .forms import UserProfileForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
@@ -32,7 +33,7 @@ def signup(request):
 def dashboard(request):
     profile = UserProfile.objects.get(user=request.user)
     achievements = Achievement.objects.filter(user=request.user).order_by('title')
-
+   
     xp_needed = profile.level * 200
     progress = round((profile.xp / xp_needed) * 200, 1) if xp_needed else 0
     total_xp = f"{profile.xp} / {xp_needed}"
@@ -45,6 +46,17 @@ def dashboard(request):
         'total_xp': total_xp
        
     })
+
+def edit_bio(request):
+    profile = UserProfile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = UserProfileForm(instance=profile)
+    return render(request, 'edit_bio.html', {'form': form})
 
 def workout_index(request):
     workouts= Workout.objects.filter(userprofile__user=request.user)

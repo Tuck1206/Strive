@@ -1,23 +1,39 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/workout_form.css' %}">
+{% endblock %}
+
 {% block title %}Workout Form{% endblock %}
+
 {% block content %}
 <section class="form-section">
 
-<div class="page-header">
-  {% if workout %}
-    <h1>Edit 
-      {{ workout.title }} 
-      {{ workout.description }} 
-      {{ workout.difficulty}}
-      {{ workout.category}}</h1>
-  {% else %}
-    <h1>Add a Workout</h1>
-  {% endif %}
-</div>
-  <form method="POST">
+  <div class="page-header">
+    {% if workout %}
+      <h1 class="form-title">Edit Workout</h1>
+      <h3 class="workout-meta">
+        {{ workout.title }} | {{ workout.difficulty|title }} | {{ workout.category|title }}
+      </h3>
+    {% else %}
+      <h1 class="form-title">Add a Workout</h1>
+      <p class="form-subtext">Design your next challenge. Define the grind.</p>
+    {% endif %}
+  </div>
+
+  <form method="POST" class="workout-form">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn-primary">Save Workout</button>
+
+    <button type="submit" class="btn-primary">
+      {% if workout %}
+        Update Workout
+      {% else %}
+        Save Workout
+      {% endif %}
+    </button>
   </form>
+
 </section>
 {% endblock %}

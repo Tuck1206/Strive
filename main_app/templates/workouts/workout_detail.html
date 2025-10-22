@@ -1,14 +1,37 @@
 {% extends 'base.html' %}
-{% block title %}{{ workout.title }}{% endblock %}
-{% block content %}
-  <h1>{{ workout.title }}</h1>
-  <p>Difficulty: {{ workout.difficulty|title }}</p>
-  <p>Category: {{ workout.category|title }}</p>
-  <p>Description: {{ workout.description }}</p>
+{% load static %}
 
-  <a href="{% url 'workout_update' workout.id %}" class="btn-secondary">Edit</a>
-  <a href="{% url 'workout_delete' workout.id %}" class="btn-danger">Delete</a>
-  {% if not workout.completed %}
-    <a href="{% url 'complete-workout' workout.id %}" class="btn-success">Mark Complete</a>
-  {% endif %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/workout_detail.css' %}">
 {% endblock %}
+
+{% block title %}{{ workout.title }}{% endblock %}
+
+{% block content %}
+
+<section class="workout-detail">
+  <div class="detail-card">
+    <h1 class="workout-title">{{ workout.title }}</h1>
+
+    <div class="workout-info">
+      <p><span>Difficulty:</span> {{ workout.difficulty|title }}</p>
+      <p><span>Category:</span> {{ workout.category|title }}</p>
+    </div>
+
+    <div class="workout-description">
+      <h3>Description</h3>
+      <p>{{ workout.description }}</p>
+    </div>
+
+    <div class="action-buttons">
+      <a href="{% url 'workout_update' workout.id %}" class="btn btn-secondary">Edit</a>
+      <a href="{% url 'workout_delete' workout.id %}" class="btn btn-danger">Delete</a>
+      {% if not workout.completed %}
+      <a href="{% url 'complete-workout' workout.id %}" class="btn btn-success">Mark Complete</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+

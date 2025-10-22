@@ -16,9 +16,13 @@
     <p class="progress-label">Current XP To Next Level: {{ total_xp }}</p>
   </div>
 
-  <div class="bio-card">
-    <p>{{ profile.bio }}</p>
+  <div class="bio-section">
+    <h3>Bio</h3>
+    <p>{{ profile.bio|default:"No bio yet. Add one!" }}</p>
+    <a href="{% url 'edit_bio' %}" class="btn-edit"> Edit Bio</a>
   </div>
+
+
 
   <section class="achievements-section">
     <h2>Achievements</h2>
@@ -39,5 +43,4 @@
     </ul>
   </section>
 </div>
-
 {% endblock %}

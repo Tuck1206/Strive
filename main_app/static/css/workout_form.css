@@ -1,0 +1,148 @@
+body {
+  background: #0a0a0a;
+  color: #eee;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 1rem;
+  position: relative;
+}
+
+.form-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../images/gym-bg.jpg") center/cover no-repeat;
+  opacity: 0.05;
+  z-index: -2;
+}
+
+.form-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(10,10,10,0.92), rgba(0,0,0,0.95));
+  z-index: -1;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeDown 0.9s ease;
+}
+
+.form-title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+.form-title::after {
+  content: "";
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #c70000, #7a0000);
+  display: block;
+  margin: 0.8rem auto 0;
+  border-radius: 3px;
+}
+
+.form-subtext {
+  color: #aaa;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  margin-top: 0.5rem;
+}
+
+.workout-meta {
+  font-size: 1rem;
+  color: #c70000;
+  margin-top: 0.6rem;
+  letter-spacing: 0.5px;
+}
+
+.workout-form {
+  background: rgba(25, 25, 25, 0.95);
+  border: 1px solid rgba(199, 0, 0, 0.3);
+  border-radius: 18px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+  animation: fadeUp 0.9s ease;
+}
+
+.workout-form p {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.workout-form label {
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.workout-form input[type="text"],
+.workout-form select,
+.workout-form textarea {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  padding: 0.8rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.workout-form input:focus,
+.workout-form select:focus,
+.workout-form textarea:focus {
+  outline: none;
+  border-color: #c70000;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 0.9rem;
+  background: linear-gradient(90deg, #c70000, #7a0000);
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #ff2d2d, #a30000);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(199, 0, 0, 0.3);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
