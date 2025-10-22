@@ -1,32 +1,28 @@
 {% extends 'base.html' %} {% load static %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{% static 'css/workouts/workout_index.css' %}"
-/>
+<link rel="stylesheet" href="{% static 'css/workouts/workout_index.css' %}" />
 {% endblock %} {% block content %}
 
 <section class="page-header">
- 
-  <h2> My Workouts</h2>
-  <div class="workout-grid">
-      {% for workout in workouts %}
-      <h3>Title:{{ workout.title }}</h3>
-      <p>Description{{ workout.description }}</p>
-      <p><strong>Difficulty:</strong> {{ workout.difficulty|capfirst }}</p>
-      <p><strong>Category:</strong> {{ workout.category|capfirst }}</p>
-      
-      <label>
-          <input type="checkbox" name="completed_workouts" value="{{ workout.id }}"
-          {% if workout.completed %}checked{% endif %}>
-          Completed ({{ workout.xp_value }} XP)
+
+    <h2> My Workouts</h2>
+    <div class="workout-grid">
+        {% for workout in workouts %}
+        <h3>Title:{{ workout.title }}</h3>
+        <p>Description{{ workout.description }}</p>
+        <p><strong>Difficulty:</strong> {{ workout.difficulty|capfirst }}</p>
+        <p><strong>Category:</strong> {{ workout.category|capfirst }}</p>
+
+        <label>
+            <input type="checkbox" name="completed_workouts" value="{{ workout.id }}" {% if workout.completed
+                %}checked{% endif %}>
+            Completed ({{ workout.xp_value }} XP)
         </label>
 
         <div class="actions">
-          <a href="{% url 'workout_detail.html' workout.id %}" class="btn-secondary">View</a>
+            <a href="{% url 'workout_detail.html' workout.id %}" class="btn-secondary">View</a>
         </div>
-    {% empty %}
-      <p>No workouts yet. Create one to get started!</p>
-      {% endfor %}
+        {% empty %}
+        <p>No workouts yet. Create one to get started!</p>
+        {% endfor %}
     </div>
     <a href="{% url 'workout_create' %}" class="btn-primary"> Add Workout</a>
-    

@@ -69,7 +69,7 @@ def create_profile(sender, instance, created, **kwargs):
     if created:
         profile = UserProfile.objects.create(user=instance)
         Achievement.objects.create(
-            profile=profile,
+            user = instance,
             title="Welcome!",
             description="You joined the fitness app and created your profile!"
         )

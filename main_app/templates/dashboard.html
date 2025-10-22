@@ -1,48 +1,43 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
 {% block content %}
 
 <div class="dashboard-container">
   <h1>Welcome, {{ profile.user.username }}!</h1>
   <h3>Level: {{ profile.level }}</h3>
 
-  <div class="progress-container">
-    <div class="progress-bar" style="width: {{ progress }}%;"></div>
-  </div>
-  <p>{{ profile.bio }}</p>
-  <p>Current XP To Next Level:{{ total_xp }}</p>
-
-<!-- 
-   <h2> My Workouts</h2>
-  <div class="workout-grid">
-      {% for workout in workouts %}
-      <h3>Title:{{ workout.title }}</h3>
-      <p>Description{{ workout.description }}</p>
-      <p><strong>Difficulty:</strong> {{ workout.difficulty|capfirst }}</p>
-      <p><strong>Category:</strong> {{ workout.category|capfirst }}</p>
-      
-      <label>
-          <input type="checkbox" name="completed_workouts" value="{{ workout.id }}"
-          {% if workout.completed %}checked{% endif %}>
-          Completed ({{ workout.xp_value }} XP)
-        </label>
-
-        <div class="actions">
-          <a href="{% url 'workout_detail.html' workout.id %}" class="btn-secondary">View</a>
-        </div>
-    {% empty %}
-      <p>No workouts yet. Create one to get started!</p>
-      {% endfor %}
+  <div class="progress-wrapper">
+    <div class="progress-container">
+      <div class="progress-bar" style="width: {{ progress }}%;"></div>
     </div>
-    <a href="{% url 'workout_create' %}" class="btn-primary"> Add Workout</a> -->
-    
-  <h2>Achievements</h2>
-  <ul class="achievements-list">
-    {% for a in achievements %}
-      <li>{{ a.title }} {{ a.description }}</li>
-    {% empty %}
-      <li>No achievements yet. Keep working out!</li>
-    {% endfor %}
-  </ul>
+    <p class="progress-label">Current XP To Next Level: {{ total_xp }}</p>
+  </div>
+
+  <div class="bio-card">
+    <p>{{ profile.bio }}</p>
+  </div>
+
+  <section class="achievements-section">
+    <h2>Achievements</h2>
+    <ul class="achievements-list">
+      {% for a in achievements %}
+        <li>
+          <div class="achievement-card">
+            <span class="badge-icon">🏅</span>
+            <div>
+              <h4>{{ a.title }}</h4>
+              <p>{{ a.description }}</p>
+            </div>
+          </div>
+        </li>
+      {% empty %}
+        <li class="no-achievement">No achievements yet. Keep working out!</li>
+      {% endfor %}
+    </ul>
+  </section>
 </div>
 
 {% endblock %}
