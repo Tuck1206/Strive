@@ -17,7 +17,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("../images/gym-bg.jpg") center/cover no-repeat;
+  /* background: url("../images/gym-bg.jpg") center/cover no-repeat; */
   opacity: 0.06;
   z-index: -2;
 }

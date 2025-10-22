@@ -107,7 +107,7 @@ a:hover {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("../images/gym-bg.jpg") center/cover no-repeat;
+  /* background: url("../images/gym-bg.jpg") center/cover no-repeat; */
   opacity: 0.15;
   filter: grayscale(50%) brightness(70%) contrast(90%);
   z-index: -2;

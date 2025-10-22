@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Workout, UserProfile, Achievement
 from .forms import UserProfileForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -29,7 +28,7 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'signup.html', context)
 
-
+@login_required
 def dashboard(request):
     profile = UserProfile.objects.get(user=request.user)
     achievements = Achievement.objects.filter(user=request.user).order_by('title')
@@ -46,7 +45,7 @@ def dashboard(request):
         'total_xp': total_xp
        
     })
-
+@login_required
 def edit_bio(request):
     profile = UserProfile.objects.get(user=request.user)
     if request.method == 'POST':
@@ -58,14 +57,17 @@ def edit_bio(request):
         form = UserProfileForm(instance=profile)
     return render(request, 'edit_bio.html', {'form': form})
 
+@login_required
 def workout_index(request):
     workouts= Workout.objects.filter(userprofile__user=request.user)
     return render(request, 'workouts_index.html', {'workouts': workouts})
 
+@login_required
 def workout_detail(request, workout_id):
     workout = Workout.objects.get(id=workout_id)
     return render(request, 'workouts/workout_detail.html', {'workout': workout})
 
+@login_required
 def complete_workout(request, workout_id):
     workout = get_object_or_404(Workout, id=workout_id, userprofile__user=request.user)
     profile = workout.userprofile
@@ -100,7 +102,7 @@ def complete_workout(request, workout_id):
 
     return redirect('/dashboard')  
 
-class WorkoutCreate(CreateView):
+class WorkoutCreate(LoginRequiredMixin, CreateView):
     model = Workout
     fields = ['title', 'description', 'difficulty', 'category']
     template_name = 'workouts/workout_form.html'
@@ -112,14 +114,14 @@ class WorkoutCreate(CreateView):
         return super().form_valid(form)
 
 
-class WorkoutUpdate(UpdateView):
+class WorkoutUpdate(LoginRequiredMixin, UpdateView):
     model = Workout
     fields = ['title', 'description', 'difficulty', 'category', 'completed']
     template_name = 'workouts/workout_form.html'
     success_url ='/workouts/'
 
 
-class WorkoutDelete(DeleteView):
+class WorkoutDelete(LoginRequiredMixin, DeleteView):
     model = Workout
     template_name = 'workouts/workout_confirm_delete.html'
     success_url ='/workouts/'

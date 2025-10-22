@@ -1,43 +1,18 @@
+/* Keep consistent with Strive's dark red theme without touching global layout */
 body {
   background: #0a0a0a;
   color: #eee;
   font-family: "Poppins", sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
 }
 
-.form-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 4rem 1rem;
-  position: relative;
-}
-
-.form-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  /* background: url("../images/gym-bg.jpg") center/cover no-repeat; */
-  opacity: 0.05;
-  z-index: -2;
-}
-
-.form-section::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg, rgba(10,10,10,0.92), rgba(0,0,0,0.95));
-  z-index: -1;
-}
-
+/* Header styling */
 .page-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin: 4rem auto 2rem;
   animation: fadeDown 0.9s ease;
 }
 
-.form-title {
+.page-header h1 {
   font-size: 2.6rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -46,7 +21,7 @@ body {
   position: relative;
 }
 
-.form-title::after {
+.page-header h1::after {
   content: "";
   width: 60px;
   height: 3px;
@@ -56,48 +31,42 @@ body {
   border-radius: 3px;
 }
 
-.form-subtext {
-  color: #aaa;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  margin-top: 0.5rem;
+.page-header img {
+  margin-top: 1rem;
+  width: 130px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(199, 0, 0, 0.3);
 }
 
-.workout-meta {
-  font-size: 1rem;
-  color: #c70000;
-  margin-top: 0.6rem;
-  letter-spacing: 0.5px;
-}
-
-.workout-form {
+/* Form container (matches workout form style) */
+.form-container {
   background: rgba(25, 25, 25, 0.95);
   border: 1px solid rgba(199, 0, 0, 0.3);
   border-radius: 18px;
   padding: 2.5rem 2rem;
   width: 100%;
   max-width: 600px;
+  margin: 0 auto 4rem;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
   animation: fadeUp 0.9s ease;
 }
 
-.workout-form p {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.5rem;
+.form-container table {
+  width: 100%;
 }
 
-.workout-form label {
-  font-weight: 600;
+.form-container label {
   color: #fff;
+  font-weight: 600;
   margin-bottom: 0.4rem;
   font-size: 1rem;
   letter-spacing: 0.5px;
+  display: block;
 }
 
-.workout-form input[type="text"],
-.workout-form select,
-.workout-form textarea {
+.form-container input,
+.form-container select,
+.form-container textarea {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
@@ -105,17 +74,20 @@ body {
   padding: 0.8rem;
   font-size: 1rem;
   transition: all 0.3s ease;
+  width: 100%;
+  margin-bottom: 1.3rem;
 }
 
-.workout-form input:focus,
-.workout-form select:focus,
-.workout-form textarea:focus {
+.form-container input:focus,
+.form-container select:focus,
+.form-container textarea:focus {
   outline: none;
   border-color: #c70000;
   background: rgba(255, 255, 255, 0.1);
 }
 
-.btn-primary {
+/* Submit button */
+.btn.submit {
   display: block;
   width: 100%;
   padding: 0.9rem;
@@ -131,12 +103,26 @@ body {
   transition: all 0.3s ease;
 }
 
-.btn-primary:hover {
+.btn.submit:hover {
   background: linear-gradient(90deg, #ff2d2d, #a30000);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(199, 0, 0, 0.3);
 }
 
+/* Error text */
+.red-text {
+  color: #ff4444;
+  text-align: center;
+  background: rgba(199, 0, 0, 0.15);
+  border: 1px solid rgba(199, 0, 0, 0.3);
+  border-radius: 6px;
+  padding: 0.7rem;
+  font-weight: 500;
+  margin: 1rem auto;
+  width: fit-content;
+}
+
+/* Subtle animations */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
@@ -147,3 +133,14 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .form-container {
+    width: 90%;
+    padding: 2rem 1.3rem;
+  }
+}
