@@ -42,9 +42,9 @@ def dashboard(request):
         'profile': profile,
         'achievements': achievements,
         'progress': progress,
-        'total_xp': total_xp
-       
+        'total_xp': total_xp  
     })
+
 @login_required
 def edit_bio(request):
     profile = UserProfile.objects.get(user=request.user)
