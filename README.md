@@ -37,7 +37,7 @@ https://trello.com/b/MpZWtloW/fitness-quest
 |-------|--------------------|
 | **Frontend** | HTML5, CSS3 (Custom Theme), Django Templates |
 | **Backend** | Python, Django |
-| **Database** | SQLite (default), scalable to PostgreSQL |
+| **Database** | PostgreSQL |
 | **Styling & Design** | Custom CSS, Red/Black Gym Theme, Google Fonts (`Bebas Neue`, `Poppins`) |
 | **Version Control** | Git & GitHub |
 | **Deployment** |  Heroku |
